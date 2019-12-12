@@ -1,6 +1,5 @@
-# knockout-react
-A wrapper / bridge for using React.js with Knockout and Knockout with React.js
-
+# knockout-vue
+Exploration into hosting Vue components within a Knockout SPA
 
 ## Usage
 
@@ -110,18 +109,3 @@ var reactHandler = ko.bindingHandlers.react = {
     }
 };
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
