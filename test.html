@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>knockout-vue</title>
 </head>
 <body>
 
 
-    <h1>Knockout Context</h1>
+<h1>Knockout Context</h1>
+
 <div id="koTest">
     <div data-bind="text: text"></div>
 
@@ -17,7 +18,9 @@
         </li>
     </ol>
 
-    <div data-bind="react: { $: ToDoList, props: { todos: todos, handleUpdate: handleUpdate }}"></div>
+    <div data-bind="react: { $: reactTodoListComponent, props: { todos: todos, handleUpdate: handleUpdate }}"></div>
+
+    <div data-bind="vue: { $: vueClickCountComponent }"></div>
 </div>
 
 <hr />
@@ -27,11 +30,20 @@
 
 <div id="reactTest"></div>
 
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
-    <script src="ideas.js"></script>
+
+    <!-- Development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="koBindings/reactBinding.js"></script>
+    <script src="koBindings/vueBinding.js"></script>
+
+    <script src="reactComponents/reactTodoList.js"></script>
+    <script src="vueComponents/vueClickCount.js"></script>
+
     <script>
+
         var vm = {
             text: "Some text in Knockout VM",
             todos: ko.observableArray([
@@ -49,13 +61,12 @@
         }, 1500);
 
 
-        // react example
-
+        // React example
         var reactList = ["one","two","three"];
 
         var render = function (todos) {
             React.render(
-                React.createElement(ToDoList, { todos: todos }),
+                React.createElement(window.reactTodoListComponent, { todos: todos }),
                 document.getElementById("reactTest")
             );
         };

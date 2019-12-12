@@ -1,3 +1,4 @@
+// Mixin is first before the component definition after
 var KnockoutMixin = {
 
     updateKnockout() {
@@ -27,12 +28,15 @@ var KnockoutMixin = {
     }
 };
 
-var ToDoList = React.createClass({
+
+
+// Component definition
+window.reactTodoListComponent = React.createClass({
     mixins: [ KnockoutMixin ],
 
     propTypes: {
         todos: React.PropTypes.array.isRequired,
-        handleUpdate: React.PropTypes.func
+        handleUpdate: React.PropTypes.func.isRequired
     },
 
     componentDidMount: function () {
@@ -67,33 +71,3 @@ var ToDoList = React.createClass({
         })));
     }
 });
-
-// <ul data-bind="react: { $: ToDoList, props: $data }><ul>
-var reactHandler = ko.bindingHandlers.react = {
-    render: function ( el, Component, props ) {
-        React.render(
-            React.createElement(Component,props),
-            el
-        );
-    },
-
-    init: function ( el, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
-        var options = valueAccessor();
-        var Component = ko.unwrap(options.component || options.$);
-        var props = ko.toJS(options.props || viewModel);
-
-        reactHandler.render(el, Component, props);
-
-        return { controlsDescendantBindings: true };
-    },
-
-    update: function ( el, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
-        var options = valueAccessor();
-        var Component = ko.unwrap(options.component || options.$);
-        var props = ko.toJS(options.props || viewModel);
-
-        reactHandler.render(el, Component, props);
-
-        return { controlsDescendantBindings: true };
-    }
-};
