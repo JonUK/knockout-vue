@@ -1,4 +1,4 @@
-// Mixin is first before the component definition after
+// Mixin is defined first and then the component defined after
 var KnockoutMixin = {
 
     updateKnockout() {
@@ -6,6 +6,8 @@ var KnockoutMixin = {
     },
 
     componentDidMount() {
+        console.log('React component mounted');
+
         this.__koTrigger = ko.observable(true);
         this.__koModel = ko.computed(function () {
             this.__koTrigger(); // subscribe to changes of this...
@@ -51,7 +53,7 @@ window.reactTodoListComponent = React.createClass({
                 this.props.handleUpdate(localTodos);
             }
 
-        }, 3000);
+        }, 2000);
     },
 
 

@@ -1,5 +1,6 @@
 const vueBinding = ko.bindingHandlers.vue = {
     render: function ( el, Component, props ) {
+        // console.log('Vue render called');
         // React.render(
         //     React.createElement(Component,props),
         //     el

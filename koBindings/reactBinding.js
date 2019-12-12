@@ -1,5 +1,6 @@
 const reactBinding = ko.bindingHandlers.react = {
     render: function ( el, Component, props ) {
+        // console.log('React render called');
         React.render(
             React.createElement(Component,props),
             el
