@@ -7,34 +7,46 @@
 <body>
 
 
-    <h3>Knockout Example</h3>
+    <h1>Knockout Context</h1>
 <div id="koTest">
     <div data-bind="text: text"></div>
-    <div data-bind="react: { $: ToDoList, props: { todos: todos }}"></div>
+
+    <ol data-bind="foreach: todos">
+        <li>
+            <span data-bind="text: $data"></span>
+        </li>
+    </ol>
+
+    <div data-bind="react: { $: ToDoList, props: { todos: todos, handleUpdate: handleUpdate }}"></div>
 </div>
 
+<hr />
 
-<h3>React Example</h3>
+
+<h1>React Context</h1>
 
 <div id="reactTest"></div>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
-    <script src="ideas.es5.js"></script>
+    <script src="ideas.js"></script>
     <script>
         var vm = {
-            text: "some text",
+            text: "Some text in Knockout VM",
             todos: ko.observableArray([
                 "one","two","three"
-            ])
+            ]),
+            handleUpdate: function (newTodos) {
+                vm.todos(newTodos);
+            }
         };
         ko.applyBindings(vm, document.getElementById("koTest"));
 
         setInterval(function () {
             vm.todos.shift();
-            vm.todos.push("" + Math.random());
-        }, 100);
+            vm.todos.push("Added in KO context - " + Math.random());
+        }, 1500);
 
 
         // react example
@@ -54,7 +66,7 @@
             reactList.shift();
             reactList.push("" + Math.random());
             render(reactList);
-        }, 100);
+        }, 2000);
 
 
     </script>
