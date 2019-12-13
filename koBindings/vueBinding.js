@@ -1,3 +1,5 @@
+let vueInstance;
+
 const vueBinding = ko.bindingHandlers.vue = {
     render: function ( el, Component, props ) {
         // console.log('Vue render called');
@@ -6,14 +8,17 @@ const vueBinding = ko.bindingHandlers.vue = {
         //     el
         // );
 
-        new Vue({
-            render: createElement => {
-                const heading = createElement('h2', null, 'Rendered in Vue');
-                const component = createElement(Component);
-                return createElement('div', { className: 'preview' }, [heading, component, 'Hello World']);
-            }
-        }).$mount(el); // .$destroy()
-
+        if (vueInstance) {
+            vueInstance.$forceUpdate();
+        } else {
+            vueInstance = new Vue({
+                render: createElement => {
+                    const heading = createElement('h2', null, 'Rendered in Vue');
+                    const component = createElement(Component);
+                    return createElement('div', { className: 'preview' }, [heading, component, 'Hello World']);
+                }
+            }).$mount(el); // .$destroy()
+        }
     },
 
     init: function ( el, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
