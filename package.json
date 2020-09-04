@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/lelandrichardson/knockout-react",
   "devDependencies": {
-    "react": "^0.13.1",
+    "react": "^0.14.0",
     "knockout": "^3.3.0",
     "babel": "^5.0.8"
   }
