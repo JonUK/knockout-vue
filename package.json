@@ -23,6 +23,6 @@
   "devDependencies": {
     "react": "^0.13.1",
     "knockout": "^3.3.0",
-    "babel": "^5.0.8"
+    "babel": "^6.23.0"
   }
 }
